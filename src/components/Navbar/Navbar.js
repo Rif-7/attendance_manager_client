@@ -4,11 +4,9 @@ import {
   Box,
   Flex,
   HStack,
-  IconButton,
   useDisclosure,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 
 const Links = ['Students', 'Classes', 'Tutors', 'Exams'];
@@ -43,20 +41,16 @@ const NavLink = props => {
 };
 
 export default function Simple() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <IconButton
-            size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <HStack spacing={8} alignItems={'center'}>
+          <HStack
+            spacing={8}
+            alignItems={'center'}
+            justify={'space-around'}
+            w="100%"
+          >
             <Box
               className="merriweather"
               fontSize={'26px'}
@@ -68,8 +62,10 @@ export default function Simple() {
               <Link to={'/'}>Attendance Manager</Link>
             </Box>
             <HStack
+              alignSelf={'flex-end'}
               as={'nav'}
               spacing={4}
+              justify={'flex-end'}
               display={{ base: 'none', md: 'flex' }}
             >
               {Links.map(link => (

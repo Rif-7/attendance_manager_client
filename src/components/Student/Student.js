@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { get_item_list } from '../../api';
+import { Link } from 'react-router-dom';
 
 const Student = () => {
   const toast = useToast();
@@ -28,7 +29,7 @@ const Student = () => {
     if (res.error) {
       return toast({
         title: 'Error',
-        description: res.error,
+        description: res.error.msg,
         status: 'error',
         duration: 9000,
         isClosable: true,
@@ -41,7 +42,9 @@ const Student = () => {
   return (
     <Box w={'100%'}>
       <HStack gap={'5px'} justify={'flex-end'} margin={'20px'}>
-        <Button colorScheme="red">Add New Student</Button>
+        <Button colorScheme="red">
+          <Link to={'/students/add'}>Add New Student</Link>
+        </Button>
       </HStack>
       <StudentList studentList={studentList} />
     </Box>
@@ -67,7 +70,7 @@ const StudentList = ({ studentList }) => {
         </Thead>
         <Tbody>
           {studentList.map(student => (
-            <TableRow key={student._id} props={student} />
+            <TableRow key={student._id} student={student} />
           ))}
         </Tbody>
       </Table>
@@ -75,13 +78,13 @@ const StudentList = ({ studentList }) => {
   );
 };
 
-const TableRow = props => {
+const TableRow = ({ student }) => {
   return (
     <Tr>
-      <Td>{`${props.f_name} ${props.l_name}`}</Td>
-      <Td>{props.rollno}</Td>
-      <Td>{props.class.name}</Td>
-      <Td>{props.class.current_sem}</Td>
+      <Td>{`${student.f_name} ${student.l_name}`}</Td>
+      <Td>{student.rollno}</Td>
+      <Td>{student.class.name}</Td>
+      <Td>{student.class.current_sem}</Td>
     </Tr>
   );
 };

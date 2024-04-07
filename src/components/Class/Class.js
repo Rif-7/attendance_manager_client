@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { get_item_list } from '../../api';
+import { Link } from 'react-router-dom';
 
 const Class = () => {
   const toast = useToast();
@@ -28,7 +29,7 @@ const Class = () => {
     if (res.error) {
       return toast({
         title: 'Error',
-        description: res.error,
+        description: res.error.msg,
         status: 'error',
         duration: 9000,
         isClosable: true,
@@ -41,7 +42,9 @@ const Class = () => {
   return (
     <Box w={'100%'}>
       <HStack gap={'5px'} justify={'flex-end'} margin={'20px'}>
-        <Button colorScheme={'red'}>Add New Class</Button>
+        <Button colorScheme={'red'}>
+          <Link to="/classes/add">Add New Class</Link>
+        </Button>
       </HStack>
       <ClassList classList={classList} />
     </Box>
@@ -66,7 +69,7 @@ const ClassList = ({ classList }) => {
         </Thead>
         <Tbody>
           {classList.map(class_ => (
-            <TableRow key={class_._id} props={class_} />
+            <TableRow key={class_._id} class_={class_} />
           ))}
         </Tbody>
       </Table>
@@ -74,7 +77,8 @@ const ClassList = ({ classList }) => {
   );
 };
 
-const TableRow = ({ name, current_sem, tutor, start_year, end_year }) => {
+const TableRow = ({ class_ }) => {
+  const { name, current_sem, tutor, start_year, end_year } = class_;
   return (
     <Tr>
       <Td>{name}</Td>

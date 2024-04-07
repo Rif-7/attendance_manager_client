@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { get_item_list } from '../../api';
+import { Link } from 'react-router-dom';
 
 const Exam = () => {
   const toast = useToast();
@@ -28,7 +29,7 @@ const Exam = () => {
     if (res.error) {
       return toast({
         title: 'Error',
-        description: res.error,
+        description: res.error.msg,
         status: 'error',
         duration: 9000,
         isClosable: true,
@@ -41,7 +42,9 @@ const Exam = () => {
   return (
     <Box w={'100%'}>
       <HStack gap={'5px'} justify={'flex-end'} margin={'20px'}>
-        <Button colorScheme="red">Add New Exam</Button>
+        <Button colorScheme="red">
+          <Link to={'/exams/add'}>Add New Exam</Link>
+        </Button>
       </HStack>
       <ExamList examList={examList} />
     </Box>
@@ -65,7 +68,7 @@ const ExamList = ({ examList }) => {
         </Thead>
         <Tbody>
           {examList.map(exam => (
-            <TableRow key={exam._id} props={exam} />
+            <TableRow key={exam._id} exam={exam} />
           ))}
         </Tbody>
       </Table>
@@ -73,13 +76,13 @@ const ExamList = ({ examList }) => {
   );
 };
 
-const TableRow = props => {
+const TableRow = ({ exam }) => {
   return (
     <Tr>
-      <Td>{props.class.name}</Td>
-      <Td>{props.name}</Td>
-      <Td>{props.date_formatted}</Td>
-      <Td>{props.time}</Td>
+      <Td>{exam.class.name}</Td>
+      <Td>{exam.name}</Td>
+      <Td>{exam.date_formatted}</Td>
+      <Td>{exam.time}</Td>
     </Tr>
   );
 };
