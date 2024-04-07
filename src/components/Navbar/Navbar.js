@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Box,
-  Flex,
-  HStack,
-  useDisclosure,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Flex, HStack, useColorModeValue } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const Links = ['Students', 'Classes', 'Tutors', 'Exams'];
