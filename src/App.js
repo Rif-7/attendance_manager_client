@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import './App.css';
+
 import {
   ChakraProvider,
   Box,
@@ -9,32 +11,27 @@ import {
   Grid,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Navbar from './components/Navbar/Navbar';
+import Class from './components/Class/Class';
+import Student from './components/Student/Student';
+import Tutor from './components/Tutor/Tutor';
+import Exam from './components/Exam/Exam';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/classes" element={<Class />} />
+          <Route path="/students" element={<Student />} />
+          <Route path="/tutors" element={<Tutor />} />
+          <Route path="/exams" element={<Exam />} />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }

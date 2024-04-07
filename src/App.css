@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono&family=Raleway&family=Space+Grotesk&family=Merriweather:wght@300;400&display=swap');
+
+.raleway {
+    font-family: "Raleway", sans-serif;
+}
+
+.space {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.merriweather { 
+    font-family: "Merriweather", serif;
+}
+
+.space-mono {
+ font-family: "Chivo Mono", monospace;
+}
