@@ -13,6 +13,7 @@ import TutorAdd from './components/Tutor/AddTutor';
 import ClassAdd from './components/Class/AddClass';
 import StudentAdd from './components/Student/AddStudent';
 import ExamAdd from './components/Exam/AddExam';
+import Attendance from './components/Attendance/Attendance';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/tutors/add" element={<TutorAdd />} />
           <Route path="/exams" element={<Exam />} />
           <Route path="/exams/add" element={<ExamAdd />} />
+          <Route path="/exams/:examId" element={<Attendance />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

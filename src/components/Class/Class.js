@@ -28,10 +28,10 @@ const Class = () => {
     const res = await get_item_list('class');
     if (res.error) {
       return toast({
-        title: 'Error',
+        title: 'Error.',
         description: res.error.msg,
         status: 'error',
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
     }

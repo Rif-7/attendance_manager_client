@@ -112,10 +112,58 @@ const create_exam = async (name, date, time, class_id) => {
   }
 };
 
+const get_attendance_data = async exam_id => {
+  try {
+    const response = await fetch(`${api_url}/exam/${exam_id}/attendance`, {
+      method: 'GET',
+      mode: 'cors',
+    });
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+    return { error: 'Error' };
+  }
+};
+
+const mark_attendance = async (exam_id, student_id) => {
+  try {
+    const response = await fetch(
+      `${api_url}/exam/${exam_id}/attendance/${student_id}`,
+      {
+        method: 'POST',
+        mode: 'cors',
+      }
+    );
+
+    return await response.json();
+  } catch (err) {
+    return { error: 'Error' };
+  }
+};
+
+const unmark_attendance = async (exam_id, student_id) => {
+  try {
+    const response = await fetch(
+      `${api_url}/exam/${exam_id}/attendance/${student_id}`,
+      {
+        method: 'DELETE',
+        mode: 'cors',
+      }
+    );
+
+    return await response.json();
+  } catch (err) {
+    return { error: 'Error' };
+  }
+};
+
 export {
   get_item_list,
   create_tutor,
   create_class,
   create_student,
   create_exam,
+  get_attendance_data,
+  mark_attendance,
+  unmark_attendance,
 };
