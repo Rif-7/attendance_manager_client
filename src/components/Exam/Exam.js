@@ -79,10 +79,12 @@ const ExamList = ({ examList }) => {
 const TableRow = ({ exam }) => {
   return (
     <Tr>
-      <Td>
+      <Td textDecoration="underline">
         <Link to={`/exams/${exam._id}`}>{exam.class.name}</Link>
       </Td>
-      <Td>{exam.name}</Td>
+      <Td textDecoration="underline">
+        <Link to={`/exams/${exam._id}`}>{exam.name}</Link>
+      </Td>
       <Td>{exam.date_formatted}</Td>
       <Td>{exam.time}</Td>
     </Tr>
