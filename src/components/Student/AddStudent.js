@@ -55,7 +55,7 @@ export default function StudentAdd() {
       setIsLoading(false);
       return toast({
         title: 'Error.',
-        description: res.error.msg,
+        description: res.error?.msg || res.error || '',
         status: 'error',
         duration: 5000,
         isClosable: true,

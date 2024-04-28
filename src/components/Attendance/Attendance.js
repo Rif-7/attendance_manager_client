@@ -13,6 +13,7 @@ import {
   Thead,
   Td,
   Button,
+  Heading,
 } from '@chakra-ui/react';
 import {
   get_attendance_data,
@@ -25,6 +26,8 @@ const Attendance = () => {
   const toast = useToast();
   const [attendees, setAttendees] = useState([]);
   const [absentees, setAbsentees] = useState([]);
+  const [examName, setExamName] = useState('');
+  const [examClass, setExamClass] = useState('');
 
   useEffect(() => {
     fetchAttendanceDetails();
@@ -67,13 +70,22 @@ const Attendance = () => {
         isClosable: true,
       });
     }
-
+    console.log(res);
     setAttendees(res.attendance_list);
     setAbsentees(res.absentee_list);
+    setExamName(res.exam.name);
+    setExamClass(res.exam.class.name + '-' + res.exam.class.current_sem);
   };
 
   return (
     <VStack gap={'20px'} align={'stretch'}>
+      <Text
+        mt={'10px'}
+        fontSize={'x-large'}
+        fontWeight={'bold'}
+        className="raleway"
+        alignSelf={'center'}
+      >{`${examName} | ${examClass}`}</Text>
       <Attended toggleAttendance={toggleAttendance} students={attendees} />
       <Absentee toggleAttendance={toggleAttendance} students={absentees} />
     </VStack>
